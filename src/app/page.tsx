@@ -15,9 +15,13 @@ const DrinksAccordion = dynamic(() => import("./new-components/drinkAccordion"))
 const ImageContentSection = dynamic(() => import("./new-components/imageContent"));
 const WhatsNew = dynamic(() => import("./new-components/whatsNew"));
 
+// Dynamic import for AgeVerification
+const AgeVerification = dynamic(() => import("@/components/AgeVerification"));
+
 const Page = () => {
   return (
     <div>
+      <AgeVerification />
       <div id="hero">
         <HeroSection />
       </div>
