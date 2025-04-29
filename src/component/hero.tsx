@@ -134,8 +134,8 @@ const HeroSection = () => {
 
       <Navbar />
 
-      {/* Floating Images - Responsive */}
-      <div className="absolute left-4 md:left-32 top-40 w-20 md:w-32 h-28 md:h-36 rotate-16 rounded-lg overflow-hidden z-20 animate-[float_6s_ease-in-out_infinite]">
+      {/* First Floating Image */}
+      <div className="absolute left-4 md:left-32 top-40 w-20 md:w-32 h-28 md:h-36 rotate-16 rounded-lg overflow-hidden z-20 md:animate-[float_3s_ease-in-out_infinite]">
         <Image
           src="/images/bg-trans-product.png"
           alt="Profile"
@@ -183,8 +183,8 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Second Floating Image - Responsive */}
-      <div className="absolute right-4 md:right-32 bottom-32 w-20 md:w-32 h-28 md:h-36 -rotate-12 rounded-lg overflow-hidden z-20 animate-[float_6s_ease-in-out_infinite] [animation-delay:1s]">
+      {/* Second Floating Image */}
+      <div className="absolute right-4 md:right-32 bottom-32 w-20 md:w-32 h-28 md:h-36 -rotate-12 rounded-lg overflow-hidden z-20 md:animate-[float_3s_ease-in-out_infinite] md:[animation-delay:1.5s]">
         <Image
           src="/images/bg-trans-product.png"
           alt="Profile"

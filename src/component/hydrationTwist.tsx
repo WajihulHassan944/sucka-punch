@@ -60,15 +60,15 @@ const HydrationTwist = () => {
   };
 
   return (
-    <div className="relative grid grid-cols-12 h-screen mb-20">
-      <div className="relative col-span-5 h-full">
+    <div className="relative grid grid-cols-1 md:grid-cols-12 h-screen mb-20">
+      <div className="relative h-48 md:col-span-5 md:h-full">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url('/images/bg-pattern-3.jpg')` }}
         />
       </div>
 
-      <div className="relative col-span-7 h-full">
+      <div className="relative h-48 md:col-span-7 md:h-full">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -77,12 +77,12 @@ const HydrationTwist = () => {
         />
       </div>
 
-      <div className="absolute left-24 top-[20%] bg-white z-10 p-8 w-96 md:w-full max-w-2xl rounded-md shadow-lg">
+      <div className="absolute left-4 right-4 md:left-24 top-[30%] md:top-[20%] bg-white z-10 p-6 md:p-8 w-auto md:w-96 md:w-full md:max-w-2xl rounded-md shadow-lg">
         <div className="mb-6">
-          <h2 className="text-4xl font-bold text-[#044588] mb-2">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#044588] mb-2">
             Hydration with a Twist (Literally)
           </h2>
-          <p className="text-gray-700">
+          <p className="text-sm md:text-gray-700">
             It&apos;s double identity is one of several distinguishing features
             of SUCKA PUNCH. At once, it&apos;s nourishing and intoxicating.Most
             drinks with alcohol dehydrate you. They&apos;re full of sugar and
@@ -93,10 +93,10 @@ const HydrationTwist = () => {
         <div ref={sliderRef} className="keen-slider overflow-hidden">
           {contentSlides.map((slide, index) => (
             <div key={index} className="keen-slider__slide">
-              <h3 className="text-2xl font-bold mb-4 text-primary">
+              <h3 className="text-xl md:text-2xl font-bold mb-4 text-primary">
                 {slide.title}
               </h3>
-              <p className="text-gray-600">{slide.description}</p>
+              <p className="text-sm md:text-base text-gray-600">{slide.description}</p>
             </div>
           ))}
         </div>
@@ -107,7 +107,7 @@ const HydrationTwist = () => {
               onClick={handlePrevClick}
               className="p-1 rounded-full border border-primary transition-all"
             >
-              <ChevronLeft className="w-5 h-5 text-primary" />
+              <ChevronLeft className="w-4 md:w-5 h-4 md:h-5 text-primary" />
             </button>
 
             <div className="flex space-x-2">
@@ -126,7 +126,7 @@ const HydrationTwist = () => {
               onClick={handleNextClick}
               className="p-1 rounded-full border border-primary transition-all"
             >
-              <ChevronRight className="w-5 h-5 text-primary" />
+              <ChevronRight className="w-4 md:w-5 h-4 md:h-5 text-primary" />
             </button>
           </div>
         )}
