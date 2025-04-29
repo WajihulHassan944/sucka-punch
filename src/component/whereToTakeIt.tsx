@@ -68,54 +68,56 @@ export default function WhereToTakeIt() {
   };
 
   return (
-    <div className="max-w-[1240px] mx-auto mb-20">
+    <div className="max-w-[1240px] mx-auto mb-20 px-4 md:px-0">
       <div>
-        {/* Left column single image with pink overlay */}
-        <div className="grid grid-cols-12 gap-4 mb-4 items-center">
-          <div className="col-span-9 items-center max-w-3xl">
-            <h2 className="text-4xl font-bold mb-6 text-[#044588]">
+        {/* Top section - Responsive */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-4 items-center">
+          {/* Text content - Full width on mobile */}
+          <div className="col-span-1 md:col-span-9 items-center max-w-3xl">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6 text-[#044588]">
               Where You Can Take It
             </h2>
-            <p className="text-lg text-gray-600 mb-6">
+            <p className="text-base md:text-lg text-gray-600 mb-6">
               This is when it becomes fascinating. SUCKA PUNCH goes where other
               beverages cannot. Let&apos;s run through several daily locations where
               this little renegade sparkles:
             </p>
           </div>
-          <div className="col-span-3 relative rounded-lg overflow-hidden group">
+
+          {/* First image - Full width on mobile */}
+          <div className="col-span-1 md:col-span-3 relative rounded-lg overflow-hidden group h-[260px]">
             <Image
               src={firstImage.src}
               alt={firstImage.alt || ""}
-              className="w-[260] h-[260px] object-cover transition-all duration-300 transform group-hover:scale-105"
+              className="w-full h-full object-cover transition-all duration-300 transform group-hover:scale-105"
+              fill
             />
             <div className="absolute bottom-2 left-2 right-2 bg-white text-[#044588] p-3 rounded-xs">
               <div className="text-left text-sm font-semibold">
                 {firstImage.caption}
               </div>
             </div>
-
-           
           </div>
         </div>
 
-        <div className="grid grid-cols-4 gap-4">
+        {/* Image grid - Responsive */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           {imageArray.map((item, index) => (
             <div
               key={index}
-              className="relative rounded-lg overflow-hidden group"
+              className="relative rounded-lg overflow-hidden group h-[260px]"
             >
               <Image
                 src={item.src}
                 alt={item.alt || ""}
-                className="w-[260] h-[260px] object-cover transition-all duration-300 transform group-hover:scale-105"
+                className="w-full h-full object-cover transition-all duration-300 transform group-hover:scale-105"
+                fill
               />
               <div className="absolute bottom-2 left-2 right-2 bg-white text-[#044588] rounded-xs p-3">
                 <div className="text-left text-sm font-semibold">
                   {item.caption}
                 </div>
               </div>
-
-            
             </div>
           ))}
         </div>

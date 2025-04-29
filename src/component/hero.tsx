@@ -159,7 +159,7 @@ const HeroSection = () => {
      
         <div className="text-center max-w-5xl mx-auto px-4 md:px-0">
           <h1 className="font-xirod text-white text-4xl md:text-6xl lg:text-8xl mb-8">
-            <span className="text-white text-lg md:text-xl lg:text-4xl -mb-6 md:mb-12 max-w-2xl mx-auto block">
+            <span className="text-white text-lg md:text-xl lg:text-4xl -mb-6 md:-mb-20 max-w-2xl mx-auto block">
               Hydration with a Twist
             </span>
             <br />
