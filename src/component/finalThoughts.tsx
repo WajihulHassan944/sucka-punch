@@ -3,6 +3,12 @@ import Link from "next/link";
 import Image from "next/image";
 
 const FinalThoughts = () => {
+  const scrollToSection = (elementId: string) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
   return (
     <>
       <div className="flex max-w-[1240px] mx-auto relative -mt-5">
@@ -10,7 +16,7 @@ const FinalThoughts = () => {
           <h2 className="text-4xl font-bold mb-4 text-[#044588]">
             Final Thoughts
           </h2>
-          <p className="text-gray-600 text-base leading-relaxed">
+          <p className="text-gray-600 text-base leading-relaxed mb-7">
             These days, we are all doing things a bit differently. Whether working from new places, 
             socializing intelligently, or taking care of our bodies while still having fun, the old models are receding.
             <br /><br />
@@ -18,6 +24,12 @@ const FinalThoughts = () => {
             <br /><br />
             If you&apos;re ready for hydration with a twist, consider a bottle of SUCKA PUNCH nearby. Your water just became a whole lot more fascinating.
           </p>
+          <button
+            onClick={() => scrollToSection("product")}
+            className="bg-[#044588] text-white font-medium py-3 md:py-4 rounded-full px-8 md:px-12 text-base md:text-xl font-xirod inline-block cursor-pointer"
+          >
+            Buy Now from Our Retail Partners
+          </button>
         </div>
       </div>
 

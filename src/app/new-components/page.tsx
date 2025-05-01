@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react'
 import ImageContentSection from './imageContent'
 import FAQSection from './faq'

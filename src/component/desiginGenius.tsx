@@ -4,6 +4,12 @@ import Image from 'next/image';
 import Image1 from './../../public/images/about-4.png'
 
 export default function DesignGenius() {
+  const scrollToSection = (elementId: string) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
   return (
     <section className="relative w-full bg-cover bg-center py-20 mb-20" style={{ backgroundImage: "url('/images/about-2.png')" }}>
       {/* Black Overlay */}
@@ -37,6 +43,12 @@ export default function DesignGenius() {
           <p className="text-lg leading-relaxed">
             Its flip-top lid and no-spill squeeze tip? That&apos;s intentional. The entire experience is about enjoyment sans the hassle.
           </p>
+          <button
+            onClick={() => scrollToSection("product")}
+            className="bg-[#044588] text-white font-medium py-3 md:py-4 rounded-full px-8 md:px-12 text-base md:text-xl font-xirod inline-block cursor-pointer"
+          >
+            Buy Now from Our Retail Partners
+          </button>
         </div>
       </div>
     </section>

@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import dynamic from 'next/dynamic';
 import HeroSection from "../component/hero";
@@ -14,7 +15,7 @@ const FinalThoughts = dynamic(() => import("@/component/finalThoughts"));
 const DrinksAccordion = dynamic(() => import("./new-components/drinkAccordion"));
 const ImageContentSection = dynamic(() => import("./new-components/imageContent"));
 const WhatsNew = dynamic(() => import("./new-components/whatsNew"));
-
+const ProductSection = dynamic(() => import("@/component/product-section"));
 // Dynamic import for AgeVerification
 const AgeVerification = dynamic(() => import("@/components/AgeVerification"));
 
@@ -36,6 +37,9 @@ const Page = () => {
 
       <div id="whereToTake">
         <WhereToTakeIt />
+      </div>
+      <div id="product">
+        <ProductSection />
       </div>
 
       <div id="hydration">
