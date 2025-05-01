@@ -22,9 +22,10 @@ export default function SuccessPage() {
   const [emailStatus, setEmailStatus] = useState<string>('');
 
   useEffect(() => {
-    const sendOrderConfirmation = async (orderData: OrderData, email: string) => {
+    const storeAndSendOrder = async (orderData: OrderData, email: string) => {
       try {
-        const response = await fetch('/api/send-order-confirmation', {
+        // Store order in Google Sheets
+        await fetch('/api/store-order', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -35,17 +36,19 @@ export default function SuccessPage() {
           }),
         });
 
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(data.error || 'Failed to send email');
-        }
-
-        console.log('Email sent successfully');
-        setEmailStatus('sent');
+        // Send confirmation email
+        await fetch('/api/send-order-confirmation', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            orderData,
+            email,
+          }),
+        });
       } catch (error) {
-        console.error('Error sending email:', error);
-        setEmailStatus('failed');
+        console.error('Error processing order:', error);
       }
     };
 
@@ -67,11 +70,9 @@ export default function SuccessPage() {
       };
 
       setOrderData(newOrderData);
+      storeAndSendOrder(newOrderData, JSON.parse(email));
 
-      // Send confirmation email
-      sendOrderConfirmation(newOrderData, JSON.parse(email));
-
-      // Clear cart data after successful order
+      // Clear cart data
       localStorage.removeItem('cartData');
       localStorage.removeItem('deliveryMethod');
       localStorage.removeItem('email');
