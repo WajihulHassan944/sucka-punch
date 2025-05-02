@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useCheckout } from '../context/CheckoutContext';
@@ -8,6 +8,20 @@ import { useCheckout } from '../context/CheckoutContext';
 const DeliveryMethod = () => {
   const { setDeliveryMethodSelected } = useCheckout();
   const [selectedMethod, setSelectedMethod] = useState("standard");
+
+  // Set delivery method as selected on component mount since standard is selected by default
+  useEffect(() => {
+    // Set delivery method as selected
+    setDeliveryMethodSelected(true);
+    
+    // Also initialize localStorage with the default standard delivery
+    if (!localStorage.getItem('deliveryMethod')) {
+      localStorage.setItem('deliveryMethod', JSON.stringify({
+        method: 'standard',
+        price: 4.99
+      }));
+    }
+  }, [setDeliveryMethodSelected]);
 
   const handleMethodChange = (method: string) => {
     setSelectedMethod(method);

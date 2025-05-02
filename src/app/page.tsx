@@ -1,6 +1,6 @@
-'use client'
+"use client";
 import React from "react";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 import HeroSection from "../component/hero";
 
 // Dynamic imports for all components
@@ -10,10 +10,16 @@ const WhereToTakeIt = dynamic(() => import("@/component/whereToTakeIt"));
 const HydrationTwist = dynamic(() => import("@/component/hydrationTwist"));
 const MixMatchDiscover = dynamic(() => import("@/component/mixMatchDiscover"));
 const LowCalorie = dynamic(() => import("@/component/lowCalorie"));
-const SustainabilityPackaging = dynamic(() => import("@/component/sustaiabilityPackaging"));
+const SustainabilityPackaging = dynamic(
+  () => import("@/component/sustaiabilityPackaging")
+);
 const FinalThoughts = dynamic(() => import("@/component/finalThoughts"));
-const DrinksAccordion = dynamic(() => import("./new-components/drinkAccordion"));
-const ImageContentSection = dynamic(() => import("./new-components/imageContent"));
+const DrinksAccordion = dynamic(
+  () => import("./new-components/drinkAccordion")
+);
+const ImageContentSection = dynamic(
+  () => import("./new-components/imageContent")
+);
 const WhatsNew = dynamic(() => import("./new-components/whatsNew"));
 const ProductSection = dynamic(() => import("@/component/product-section"));
 // Dynamic import for AgeVerification

@@ -60,6 +60,7 @@ export default function OrderSummary() {
       window.removeEventListener('storage', handleStorageChange);
       clearInterval(interval);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const totalWithDelivery = (Number(cartData.total) + deliveryMethod.price).toFixed(2);

@@ -17,15 +17,26 @@ interface OrderData {
   };
 }
 
+interface ShippingDetails {
+  fullName: string;
+  phone: string;
+  email: string;
+  address: string;
+  city: string;
+  zipCode: string;
+}
+
 export default function SuccessPage() {
   const [orderData, setOrderData] = useState<OrderData | null>(null);
   const [emailStatus, setEmailStatus] = useState<string>('');
+  const [shippingDetails, setShippingDetails] = useState<ShippingDetails | null>(null);
 
   useEffect(() => {
-    const storeAndSendOrder = async (orderData: OrderData, email: string) => {
+    const storeAndSendOrder = async (orderData: OrderData, email: string, shipping: ShippingDetails | null) => {
       try {
-        // Store order in Google Sheets
-        await fetch('/api/store-order', {
+        
+        // Store order in database
+        const response = await fetch('/api/store-order', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -33,8 +44,13 @@ export default function SuccessPage() {
           body: JSON.stringify({
             orderData,
             email,
+            shipping,
           }),
         });
+        
+        if (!response.ok) {
+          console.error('Failed to store order:', await response.text());
+        }
 
         // Send confirmation email
         await fetch('/api/send-order-confirmation', {
@@ -47,8 +63,11 @@ export default function SuccessPage() {
             email,
           }),
         });
+        
+        setEmailStatus('sent');
       } catch (error) {
         console.error('Error processing order:', error);
+        setEmailStatus('failed');
       }
     };
 
@@ -61,8 +80,14 @@ export default function SuccessPage() {
     const cartData = localStorage.getItem('cartData');
     const deliveryMethod = localStorage.getItem('deliveryMethod');
     const email = localStorage.getItem('email');
+    const shippingData = localStorage.getItem('shippingDetails');
 
-    if (cartData && deliveryMethod && email) {
+    if (cartData && deliveryMethod) {
+      const parsedShipping = shippingData ? JSON.parse(shippingData) : null;
+      setShippingDetails(parsedShipping);
+      
+      const emailValue = email ? JSON.parse(email) : '';
+      
       const newOrderData = {
         orderNumber: generateOrderNumber(),
         cartData: JSON.parse(cartData),
@@ -70,12 +95,13 @@ export default function SuccessPage() {
       };
 
       setOrderData(newOrderData);
-      storeAndSendOrder(newOrderData, JSON.parse(email));
+      storeAndSendOrder(newOrderData, emailValue, parsedShipping);
 
       // Clear cart data
       localStorage.removeItem('cartData');
       localStorage.removeItem('deliveryMethod');
       localStorage.removeItem('email');
+      localStorage.removeItem('shippingDetails');
     }
   }, []);
 

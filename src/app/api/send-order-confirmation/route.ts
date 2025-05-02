@@ -19,9 +19,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // Log the incoming data
-    console.log('Attempting to send email to:', email);
-    console.log('Order Data:', orderData);
 
     const { data, error } = await resend.emails.send({
       from: 'onboarding@resend.dev',
@@ -68,7 +65,6 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
 
-    console.log('Email sent successfully:', data);
     return NextResponse.json({ success: true, data });
 
   } catch (error) {

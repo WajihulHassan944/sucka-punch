@@ -31,10 +31,21 @@ export default function DeliveryForm() {
     const required: (keyof FormData)[] = ['fullName', 'phone', 'address', 'city', 'zipCode'];
     const isComplete = required.every(field => formData[field].trim() !== '');
     setDeliveryFormComplete(isComplete);
+    
+    // If form is complete, save all shipping details to localStorage
+    if (isComplete) {
+      saveShippingDetails();
+    }
+  };
+
+  const saveShippingDetails = () => {
+    localStorage.setItem('shippingDetails', JSON.stringify(formData));
   };
 
   useEffect(() => {
     validateForm();
+    
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,10 +55,9 @@ export default function DeliveryForm() {
       [id]: value
     }));
 
-    // Save email to localStorage immediately when it changes
+    // Still save email separately for backward compatibility
     if (id === 'email') {
       localStorage.setItem('email', JSON.stringify(value.trim()));
-      console.log('Email saved to localStorage:', value.trim());
     }
   };
 

@@ -1,9 +1,27 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { useAuth } from "@/app/context/AuthContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { user, logout, loading } = useAuth();
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const scrollToSection = (elementId: string) => {
     const element = document.getElementById(elementId);
@@ -11,6 +29,24 @@ const Navbar = () => {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
     setIsMenuOpen(false);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      setDropdownOpen(false);
+    } catch (err) {
+      console.error("Error logging out:", err);
+    }
+  };
+
+  // Get initials for avatar fallback
+  const getInitials = () => {
+    if (!user) return "?";
+    if (user.firstName && user.lastName) {
+      return `${user.firstName[0]}${user.lastName[0]}`.toUpperCase();
+    }
+    return user.email.substring(0, 2).toUpperCase();
   };
 
   return (
@@ -105,6 +141,68 @@ const Navbar = () => {
           >
             Buy Now
           </button>
+          
+          {/* Auth Buttons */}
+          <div className="flex items-center gap-2 pl-2">
+            {loading ? (
+              <div className="w-8 h-8 rounded-full bg-white/10 animate-pulse flex items-center justify-center">
+                <div className="w-4 h-4 border-2 border-white/80 border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            ) : user ? (
+              <div ref={dropdownRef} className="relative">
+                <button 
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                  className="flex items-center gap-2"
+                >
+                  <div className="w-8 h-8 rounded-full bg-[#044588] flex items-center justify-center text-white text-sm cursor-pointer hover:bg-[#033366] transition-colors">
+                    {getInitials()}
+                  </div>
+                </button>
+                
+                {dropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                    <div className="px-4 py-2 border-b">
+                      <p className="text-sm font-medium text-gray-900 truncate">{user.email}</p>
+                    </div>
+                    
+                    {user.isAdmin && (
+                      <Link 
+                        href="/admin" 
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={() => setDropdownOpen(false)}
+                      >
+                        Admin Dashboard
+                      </Link>
+                    )}
+                    
+                    <Link 
+                      href="/profile" 
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Profile
+                    </Link>
+                    
+                    <button
+                      onClick={handleLogout}
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <>
+                <Link href="/login" className="text-white/70 hover:text-white/90 text-sm font-medium px-4 cursor-pointer">
+                  Login
+                </Link>
+                <Link href="/signup" className="text-white bg-[#044588] hover:bg-[#033366] text-sm font-medium px-4 py-2 rounded-full cursor-pointer">
+                  Sign Up
+                </Link>
+              </>
+            )}
+          </div>
         </div>
       </div>
 
@@ -131,6 +229,67 @@ const Navbar = () => {
               {item.label}
             </button>
           ))}
+          
+          {/* Auth Buttons for Mobile */}
+          {loading ? (
+            <div className="w-10 h-10 rounded-full bg-white/10 animate-pulse flex items-center justify-center mb-6">
+              <div className="w-5 h-5 border-2 border-white/80 border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          ) : user ? (
+            <>
+              <div className="flex flex-col items-center mb-4">
+                <div className="w-16 h-16 rounded-full bg-[#044588] flex items-center justify-center text-white text-xl mb-2">
+                  {getInitials()}
+                </div>
+                <p className="text-white text-sm">{user.email}</p>
+              </div>
+              
+              {user.isAdmin && (
+                <Link 
+                  href="/admin" 
+                  className="text-white text-lg font-medium px-6 py-3 hover:bg-white/10 rounded-full w-64 text-center"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Admin Dashboard
+                </Link>
+              )}
+              
+              <Link 
+                href="/profile" 
+                className="text-white text-lg font-medium px-6 py-3 hover:bg-white/10 rounded-full w-64 text-center"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Profile
+              </Link>
+              
+              <button
+                onClick={() => {
+                  handleLogout();
+                  setIsMenuOpen(false);
+                }}
+                className="text-white text-lg font-medium px-6 py-3 hover:bg-white/10 rounded-full w-64 text-center"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link 
+                href="/login" 
+                className="text-white text-lg font-medium px-6 py-3 hover:bg-white/10 rounded-full w-64 text-center"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Login
+              </Link>
+              <Link 
+                href="/signup" 
+                className="text-white text-lg font-medium bg-[#044588] hover:bg-[#033366] px-6 py-3 rounded-full w-64 text-center"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Sign Up
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </nav>

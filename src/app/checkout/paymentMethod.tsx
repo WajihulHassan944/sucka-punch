@@ -31,7 +31,6 @@ const PaymentForm = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!stripe || !elements) {
-      console.log("Stripe not initialized");
       return;
     }
 
@@ -42,17 +41,12 @@ const PaymentForm = () => {
       // Log cart and delivery data
       const cartData = localStorage.getItem('cartData');
       const deliveryMethod = localStorage.getItem('deliveryMethod');
-      console.log("Cart Data:", cartData);
-      console.log("Delivery Method:", deliveryMethod);
+     
 
       const parsedCart = cartData ? JSON.parse(cartData) : null;
       const parsedDelivery = deliveryMethod ? JSON.parse(deliveryMethod) : null;
 
-      // Log amount being sent to create payment intent
-      console.log("Sending amount:", {
-        amount: parsedCart.total,
-        deliveryFee: parsedDelivery.price,
-      });
+  
 
       // Create payment intent
       const response = await fetch('/api/create-payment-intent', {
@@ -94,7 +88,6 @@ const PaymentForm = () => {
         }
       });
 
-      console.log("Payment Result:", result);
 
       if (result.error) {
         setError(result.error.message || 'Payment failed');
