@@ -33,7 +33,7 @@ export default function CheckoutPage() {
               <DeliveryMethod />
               <PaymentSection />
             </div>
-          </div>
+          </div> 
         </div>
       </div>
     </CheckoutProvider>
