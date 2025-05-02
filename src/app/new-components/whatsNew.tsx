@@ -28,7 +28,7 @@ export default function WhatsNew() {
       <div className="max-w-[1240px] mx-auto">
         <div className="text-left -mb-4 md:-mb-10">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-semibold leading-tight text-gray-900">
-            Let’s Through <br /> What’s New
+            Let’s Go Through <br /> What’s New
           </h2>
         </div>
 

@@ -24,7 +24,7 @@ export default function CheckoutPage() {
           </h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="order-1 lg:order-2 lg:col-span-1 sticky top-6 h-fit">
+            <div className="order-1 lg:order-2 lg:col-span-1 top-6 h-fit">
               <OrderSummary />
             </div>
 
