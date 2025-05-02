@@ -7,7 +7,7 @@ const ProductSection = () => {
   const router = useRouter();
   const [currentImage, setCurrentImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const basePrice = 5.99;
+  const basePrice = 6.99;
 
   const images = [
     "/images/about-3.png",

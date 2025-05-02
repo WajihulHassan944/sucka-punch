@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 export default function OrderSummary() {
   const [cartData, setCartData] = useState({ quantity: 0, price: 0, total: "0" });
   const [deliveryMethod, setDeliveryMethod] = useState({ method: 'standard', price: 4.99 });
+  const basePrice = 6.99;
 
   useEffect(() => {
     // Initial load
