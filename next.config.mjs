@@ -3,8 +3,10 @@ const { IgnorePlugin } = webpack;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
-  webpack: (config) => {
+  images: {
+    domains: ['images.unsplash.com'],
+  },
+  webpack: (config, { isServer }) => {
     config.plugins = config.plugins || [];
     config.plugins.push(
       new IgnorePlugin({
