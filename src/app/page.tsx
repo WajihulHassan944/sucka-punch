@@ -2,7 +2,7 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import HeroSection from "../component/hero";
-
+import Footer from "@/component/footer";
 // Dynamic imports for all components
 const About = dynamic(() => import("./new-components/about"));
 const DesignGenius = dynamic(() => import("@/component/desiginGenius"));
@@ -78,6 +78,9 @@ const Page = () => {
 
       <div id="buy">
         <FinalThoughts />
+      </div>
+      <div id="footer">
+        <Footer />
       </div>
     </div>
   );

@@ -33,26 +33,7 @@ const FinalThoughts = () => {
         </div>
       </div>
 
-      {/* Footer Bar */}
-      <div className="bg-[#1a2e35] text-white py-4 mt-20">
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <Image
-              src="/images/sucka-logo.png"
-              alt="SUCKA PUNCH Logo"
-              width={80}
-              height={40}
-              className="object-contain"
-            />
-          </Link>
-
-          {/* Copyright Text */}
-          <div className="text-white/70 text-sm">
-            © {new Date().getFullYear()} SUCKA PUNCH. All Rights Reserved.
-          </div>
-        </div>
-      </div>
+   
     </>
   );
 };
