@@ -18,7 +18,7 @@ const ChatbaseWidget = () => {
       const onLoad = function () {
         const script = document.createElement("script");
         script.src = "https://www.chatbase.co/embed.min.js";
-        script.id = "4ke2srJtbF4_VgZJrMeiM"; // YOUR BOT ID
+        script.id = "lb-YHY7qK43eoCxvpfbIa"; // YOUR BOT ID
         script.domain = "www.chatbase.co";
         document.body.appendChild(script);
       };
